@@ -1,0 +1,89 @@
+Q1. Write a query to fetch the number of employees working in the department ‘Admin’
+
+select count(*) as number_of_employees from EmployeeInfo where department = 'Admin';
+
+
+ number_of_employees 
+---------------------
+                   2
+(1 row)
+
+
+ Q2. Write a query to retrieve the first four characters of  EmpLname from the EmployeeInfo table.
+
+select SUBSTRING(emplname,1,4) as EMPLNAME from EmployeeInfo;
+
+ emplname 
+----------
+ Mehr
+ Mish
+ Diwa
+ Kulk
+ Kapo
+(5 rows)
+
+
+Q3. Write a query to find all the employees whose salary is between 50000 to 100000.
+
+select i.empfname,i.emplname from 
+EmployeeInfo i
+JOIN
+EmployeePosition p
+ON i.empid = p.empid
+where salary between 50000 AND 100000;
+
+ empfname | emplname 
+----------+----------
+ Ananya   | Mishra
+ Rohan    | Diwan
+ Sonia    | Kulkarni
+(3 rows)
+
+ Q4. Write a query to find the names of employees that begin with ‘S’
+
+select empfname from EmployeeInfo where empfname LIKE 'S%';
+
+ empfname 
+----------
+ Sanjay
+ Sonia
+(2 rows)
+
+
+ Q5. Write a query to fetch top N records order by salary. (ex. top 5 records)
+
+SELECT * FROM EmployeePosition ORDER BY Salary DESC limit 5;
+
+ empid | empposition | dateofjoining | salary 
+-------+-------------+---------------+--------
+     1 | Manager     | 2022-05-01    | 500000
+     5 | Executive   | 2022-05-01    | 300000
+     3 | Manager     | 2022-05-01    |  90000
+     4 | Lead        | 2022-05-02    |  85000
+     2 | Executive   | 2022-05-02    |  75000
+(5 rows)
+
+
+Q 6. Write a query to fetch details of all employees excluding the employees with first names, “Sanjay” and “Sonia” from the EmployeeInfo table.
+
+select * from EmployeeInfo where empfname NOT IN ('Sanjay','Sonia');
+
+ empid | empfname | emplname | department | project |   address   |    dob     | gender 
+-------+----------+----------+------------+---------+-------------+------------+--------
+     2 | Ananya   | Mishra   | Admin      | P2      | Delhi(DEL)  | 1968-05-02 | F
+     3 | Rohan    | Diwan    | Account    | P3      | Mumbai(BOM) | 1980-01-01 | M
+     5 | Ankit    | Kapoor   | Admin      | P2      | Delhi(DEL)  | 1994-07-03 | M
+(3 rows)
+
+
+ Q7. Write a query to fetch the department-wise count of employees sorted by department’s count in ascending order.
+
+Select department, count(*) as department’s_count from EmployeeInfo Group BY department Order BY department’s_count ASC;
+
+ department | department’s_count 
+------------+--------------------
+ Account    |                  1
+ Admin      |                  2
+ HR         |                  2
+(3 rows)
+
